@@ -1,4 +1,4 @@
-# Simple reinforcement learning project
+# Simple Reinforcement Learning Project
 
 This is a very simple _reinforcement learning_ project with the goal of training a neural network to play the _connect four_ game. The network is trained only by playing against itself without any human interaction or prepared training data.
 
@@ -13,6 +13,24 @@ V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, M. Ri
 ## Idea and Approach
 
 This project was a small weekend project in order to experiment a little bit with reinforcement learning and give the tensorflow API a try, which I had not used before. Please note that I am by no means an expert in reinforcement learning, nor am I an experienced tensorflow user. Also, the goal of this project was *not* to create the best possible AI opponent for playing connect four - please note that the problem of connect four has already been mathematically solved (see [https://en.wikipedia.org/wiki/Connect_Four]). Instead, this project was only about implementing a simple deep reinforcement learning strategy in a relatively short amount of time. *(In the end, this took me longer than a weekend as I tried out a few variants, different network topologies, optimizers, and parameter sets. Nevertheless, the basic implementation is rather simple and consists only of  a few lines of code)*.
+
+In the following, I will try to give you an overview of what I have done and what the result looks like.
+
+### Reinforcement Learning
+
+Coming soon...
+
+### Connect Four
+
+Coming soon...
+
+### Implementation
+
+Coming soon...
+
+### Results
+
+Coming soon...
 
 ## Prerequisites
 
