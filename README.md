@@ -10,6 +10,10 @@ The implementation of this project follows the approach proposed in the followin
 
 V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, M. Riedmiller: _Playing Atari with Deep Reinforcement Learning_. CoRR abs/1312.5602 (2013) [https://arxiv.org/pdf/1312.5602.pdf]
 
+## Idea and Approach
+
+This project was a small weekend project in order to experiment a little bit with reinforcement learning and give the tensorflow API a try, which I had not used before. Please note that I am by no means an expert in reinforcement learning, nor am I an experienced tensorflow user. Also, the goal of this project was *not* to create the best possible AI opponent for playing connect four - please note that the problem of connect four has already been mathematically solved (see [https://en.wikipedia.org/wiki/Connect_Four]). Instead, this project was only about implementing a simple deep reinforcement learning strategy in a relatively short amount of time. *(In the end, this took me longer than a weekend as I tried out a few variants, different network topologies, optimizers, and parameter sets. Nevertheless, the basic implementation is rather simple and consists of only a few lines of code)*.
+
 ## Prerequisites
 
 The code is implemented using **Python 3.6** and uses the deep learning framework **Tensorflow**. You can simply install Tensorflow for Python via pip. However, for using this code I would advice you to use a machine with a dedicated GPU that is CUDA-capable and install the GPU-version of Tensorflow (otherwise training thr network might take a very long time). You might need to compile Tensorflow yourself, depending on your GPU driver and CUDA version, but you should find sufficient resources for that online.
