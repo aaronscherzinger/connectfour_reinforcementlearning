@@ -151,11 +151,11 @@ What the network **did** learn very well was not to insert discs into a full col
 |x o o o o x .|  
  -------------  
 ```
-Overall, it can maybe compared to a kid that sometimes struggles to see an obvious trap, but sometimes has a clever idea and will try to fool you if you do not pay attention :-)
+Overall, you could maybe compare the network to a little kid that sometimes struggles to see an obvious trap, but in other instances has a clever idea and will try to fool you if you do not pay attention :-)
 
 ## Prerequisites for Running the Code
 
-The code is implemented using **Python 3.6** and uses the deep learning framework **Tensorflow**. You can simply install Tensorflow for Python via pip. However, for using this code I would advice you to use a machine with a dedicated GPU that is CUDA-capable and install the GPU-version of Tensorflow (otherwise training thr network might take a very long time). You might need to compile Tensorflow yourself, depending on your GPU driver and CUDA version, but you should find sufficient resources for that online.
+The code is implemented using **Python 3.6** and uses the deep learning framework **Tensorflow**. You can simply install Tensorflow for Python via pip. However, for using this code I would advice you to use a machine with a dedicated GPU that is CUDA-capable and install the GPU-version of Tensorflow (otherwise training the network might take a very long time). You might need to compile Tensorflow yourself, depending on your GPU driver and CUDA version, but there are sufficient resources for that online.
 
 You will also need some additional Python packages such as numpy, matplotlib, and - for running the unit tests - the unittest package, which sould also be available for your Python distribution, e.g. via pip.
 
