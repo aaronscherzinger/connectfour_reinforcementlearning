@@ -80,7 +80,8 @@ However, since my initial goal was not to create the best possible AI for playin
 
 What the network **did** learn very well was not to insert discs into a full column (which is better than nothing, I guess). And sometimes, if you do not watch out, it will make some nice strategic moves, as you can see here from the output of my text-based playing example program:
 
-```(Turn 1 - the AI inserts into column 3):  
+```
+(Turn 1 - the AI inserts into column 3):  
  0 1 2 3 4 5 6  
 |. . . . . . .|  
 |. . . . . . .|  
@@ -130,7 +131,7 @@ What the network **did** learn very well was not to insert discs into a full col
 |x . o o o . .|  
  -------------  
  
-(From here on, you are lost - here the player insert into column 5):
+(From here on, the player is lost - he decides to insert into column 5):
  0 1 2 3 4 5 6  
 |. . . . . . .|  
 |. . . . . . .|  
