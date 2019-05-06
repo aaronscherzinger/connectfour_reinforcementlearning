@@ -34,13 +34,41 @@ Q-learning now works by iteratively updating the Q-function, i.e., the estimates
 *Q(s<sub>t</sub>,a<sub>t</sub>) <- Q(s<sub>t</sub>,a<sub>t</sub>) + l * (r<sub>t+1</sub> + n * max<sub>a'</sub> (Q(s<sub>t+1</sub>,a')) - Q(s<sub>t</sub>,a<sub>t</sub>))*,  
 where *l* is a learning rate.
 
+### Neural Networks and Deep Learning
+
+Over the last decade, neural networks have been undergoing a renaissance due to the capabilities of modern programmable graphics hardware as well as the availability of large amounts of data for training networks with millions of *weights* (i.e., trainable parameters). Since then, neural networks have continuously set new performance benchmarks in many areas, especially in computer vision and pattern recognition. As a detailed review of the basics of *feedforward neural networks*, also referred to as *multilayer perceptrons*, *backpropagation* (the algorithm used for computing the gradient of some *loss function*, i.e. error function, with respect to the weights of the network, usually in order to perform an iterative optimization via some variant of gradient descent), and *convolutional neural networks* (*CNN*s) would go far beyond the scope of this quick overview, I would refer you to the following resources for the details of training neural networks:
+
+[https://www.deeplearningbook.org/]
+
+[http://neuralnetworksanddeeplearning.com/]
+
+[https://www.coursera.org/learn/machine-learning]
+
 ### Connect Four
 
-Coming soon...
+It is probably not necessary to provide a detailed exlanation of the connect four game, as most people should be familiar with it. If not, you can find some information here: [https://en.wikipedia.org/wiki/Connect_Four]
+
+In the implementation, the playing board is represented by a *7x6* numpy array (column-major order), where *0* corresponds to an unoccupied space, *1* corresponds to a disc of player 1, and *-1* corresponds to a disc of player 2 (this helps with easily inverting the roles of the players, as will be used frequently during training the network). For more implementation details, please refer directly to the source files (you will find a list of the files with a quick description of their corresponding contents at the bottom).
 
 ### Implementation
 
-Coming soon...
+The implementation follows the approach proposed by Mnih et al. Please refer to the corresponding paper using the link above. 
+
+The overall concept works as follows:
+
+* First we create a neural network (or CNN) with randomly initialized weights
+  * As its input, the neural network receives the playing field (which corresponds to the state *s<sub>t</sub>*), where the neural network is always player 1.
+  * The output of the neural network consists of 7 numbers, each representing the result of the Q-function, i.e., an estimate of the expected future discounted reward, for inserting a disc into the corresponding column. The chosen action *a<sub>t</sub>* is thus an integer in the range *[0, 6]*.
+* In each step, the network takes a turn, which is chosen using the *epsilon-greedy* strategy: with probability *(1-epsilon)*, we will choose the action where the network expects the highest future discounted reward (*exploitation*), otherwise we will choose a random action (*exploration*). Over time, when the estimates of the Q-function will converge more and more (i.e., the network gets better at its estimations), we will decrease the value of *epsilon* from the initial value of *1* to a value of *0.1*. 
+* After performing the turn, one of the following situations can occur:
+  1. We won the game - the immediate reward *r<sub>t+1</sub>* will be set to *+1*, the resulting state *s<sub>t+1</sub>* is set to the terminal state that resulted from the action.
+  2. If we did not directly win, we will obtain the resulting state *s<sub>t+1</sub>* as the next state that results from the opponent's move - we will thus create a temporary copy of the playing board after making our move, invert the roles of the players on the temporary board and let the neural network make another turn on this temporary board (obviously now as the opponent). The temporary board is again inverted and we obtain the expected resulting state *s<sub>t+1</sub>* which resulted from the opponent's action. If we now lost the game, the immediate reward *r<sub>t+1</sub>* will be set to *-1* (i.e., we punish the network for losing the game), otherwise it will be set to *0*.
+  3. If we chose an action that tries to insert a disc into a colummn that is already full, we set the immediate reward *r<sub>t+1</sub>* to *-2* - that means that we will punish the neural network more for trying to break the rules than for losing the game.
+* The transition *(s<sub>t</sub>, a<sub>t</sub>, *r<sub>t+1</sub>*, *s<sub>t+1</sub>*)* along with the information if *s<sub>t+1</sub>* is a terminal game state will be stored in a *replay memory* consisting of the last *N* transitions.
+* If the playing board is in a terminal state, it will be reset to an empty state. Else, players will be switched, so that in the next turn, the neural network will take the opposite role. The networks thus learns by playing against itself without any exterior input (except of course the parameters such as the fixed rewards, etc.).
+* From the replay memory, a *mini-batch* of *M* transitions is randomly assembled to perform a backpropagation pass for updating the weights of the neural network to improve the estimate of the Q-function. For details, please refer to the explanations provided by Mnih et al. in the corresponding paper listed above or directly to the code.
+
+In regular intervals, the current loss is plotted using a simple line plot. After a fixed number of played games, the training ends and the weights, i.e., the parameter corresponding to the current training state of the neural network, are exported.
 
 ### Results
 
