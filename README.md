@@ -72,9 +72,87 @@ In regular intervals, the current loss is plotted using a simple line plot. Afte
 
 ### Results
 
-Coming soon...
+The results of this small project in terms of the overall performance of the networks were not too brilliant, although I did increase the size of the networks by a considerable amount over the course of my experiments. The current feedforward network has a size of 42 inputs (the playing field), four hidden layers with 4096, 2048, 1024, and 512 fully connected units, and 7 outputs (for the columns). The CNN-version has two 3x3 conv layers with 512 and 768 Kernels filter kernels, followed by a fully connected part with 2048, 1024, 512, and 256 neurons. Training the fully connected network takes around two hours on my NVIDIA GTX 1070 GPU with CUDA 10 (however, please take into account that the code is anything but optimized). Of course, you can reduce the size of the neural networks as well as the number of played training games (*episodes*) in the code prior to starting the training in order to reduce the amount of required time. 
 
-## Prerequisites
+The poor performance of the networks might indicate that the problem of playing connect four is not very well-suited for direct processing by a neural net. This might be due to the fact that neural networks are very good in learning continous relations between input and output where the output changes only slightly if the input does so as well - this is for instance the case with the Atari games in the paper of Mnih et al.: between very similar frames, the playing situation, and thus estimates of the expected reward for taking a specific action, does not drastically change, yielding a more or less continous relation. However, for connect four this is not the case, as the playing situations are dicrete states that change very rapidly, not in a smooth and continous fashion. While looking into this, I stumpled upon this post addressing this question: [https://www.quora.com/How-do-I-make-Q-learning-with-ANN-work-for-a-simple-board-game]
+
+However, since my initial goal was not to create the best possible AI for playing connect four, but only to implement a simple working example of reinforcement learning, I did no further investigation (if you know more about this, please feel free to contact me). For implementing an efficient AI for connect four, other solutions would probably be more adequate, anyway. 
+
+What the network **did** learn very well was not to insert discs into a full column (which is better than nothing, I guess). And sometimes, if you do not watch out, it will make some nice strategic moves, as you can see here from the output of my text-based playing example program:
+
+```(Turn 1 - the AI inserts into column 3):  
+ 0 1 2 3 4 5 6  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . o . . .|  
+ -------------  
+   
+(Player inserts into column 3):  
+ 0 1 2 3 4 5 6  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . x . . .|  
+|. . . o . . .|  
+ -------------  
+   
+(Turn 1 - the AI inserts into column 2):  
+ 0 1 2 3 4 5 6  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . x . . .|  
+|. . o o . . .|  
+ -------------  
+   
+(Player makes a mistake and insert into column 0):  
+ 0 1 2 3 4 5 6  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . x . . .|  
+|x . o o . . .|  
+ -------------  
+   
+(Now the AI will use a strategy that leads to a guaranteed win):  
+ 0 1 2 3 4 5 6  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . x . . .|  
+|x . o o o . .|  
+ -------------  
+ 
+(From here on, you are lost - here the player insert into column 5):
+ 0 1 2 3 4 5 6  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . x . . .|  
+|x . o o o x .|  
+ -------------  
+ 
+(And the AI wins the game):
+ 0 1 2 3 4 5 6  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . . . . .|  
+|. . . x . . .|  
+|x o o o o x .|  
+ -------------  
+```
+Overall, it can maybe compared to a kid that sometimes struggles to see an obvious trap, but sometimes has a clever idea and will try to fool you if you do not pay attention :-)
+
+## Prerequisites for Running the Code
 
 The code is implemented using **Python 3.6** and uses the deep learning framework **Tensorflow**. You can simply install Tensorflow for Python via pip. However, for using this code I would advice you to use a machine with a dedicated GPU that is CUDA-capable and install the GPU-version of Tensorflow (otherwise training thr network might take a very long time). You might need to compile Tensorflow yourself, depending on your GPU driver and CUDA version, but you should find sufficient resources for that online.
 
