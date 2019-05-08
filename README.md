@@ -46,7 +46,8 @@ Over the last decade, neural networks have been undergoing a renaissance due to 
 
 ### Connect Four
 
-It is probably not necessary to provide a detailed exlanation of the connect four game, as most people should be familiar with it. If not, you can find some information here: [https://en.wikipedia.org/wiki/Connect_Four]
+It is probably not necessary to provide a detailed exlanation of the connect four game, as most people should be familiar with it. The game consists of a grid of 7 columns and 6 rows which is vertically suspended. Two players take alternating turns in dropping a colored disc into one of the columns. As soon as one of the players has four discs that form a vertical, horizontal, or diagonal line, this player wins the game. If no space is left in any of the columns, the game results in a draw. 
+If you are not familiar with the game, you can find some information here: [https://en.wikipedia.org/wiki/Connect_Four]
 
 In the implementation, the playing board is represented by a *7x6* numpy array (column-major order), where *0* corresponds to an unoccupied space, *1* corresponds to a disc of player 1, and *-1* corresponds to a disc of player 2 (this helps with easily inverting the roles of the players, as will be used frequently during training the network). For more implementation details, please refer directly to the source files (you will find a list of the files with a quick description of their corresponding contents at the bottom).
 
