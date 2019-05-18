@@ -6,7 +6,7 @@ For an overview of the basic concepts of reinforcement learning you can refer to
 
 V.Heidrich-Meisner, M. Lauer, C. Igel, and M. Riedmiller: _Reinforcement Learning in a Nutshell_. ESANN 2007, pp. 277-288, 2007. [https://christian-igel.github.io/paper/RLiaN.pdf]
 
-The implementation of this project follows the approach proposed in the following paper:
+The implementation of this project follows the approach proposed here:
 
 V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, M. Riedmiller: _Playing Atari with Deep Reinforcement Learning_. CoRR abs/1312.5602 (2013) [https://arxiv.org/pdf/1312.5602.pdf]
 
